@@ -42,29 +42,40 @@ class Sorter {
             end = indices[1];
         }
         this.copy_partArr = this._arr.slice(begin, end + 1);
-        console.log(this.copy_partArr)
 
-        function compareNumeric(a, b) {
+        /*function compareNumeric(a, b) {
             return a - b;
-        }
-        this.sort_arr = this.copy_partArr.sort(compareNumeric);
-        
-        
+        }*/
+        this.sort_arr = this.copy_partArr.sort(this.comparator);
+
         function insertArrayAt(array, index, arrayToInsert) {
             let delete_length = end - (begin - 1);
             Array.prototype.splice.apply(array, [index, delete_length].concat(arrayToInsert));
-            console.log(array);
+            //          console.log(array);
             return array;
         }
         insertArrayAt(this._arr, begin, this.sort_arr);
     }
     setComparator(compareFunction) {
         // your implementation
-        return this.copy_partArr.sort(compareFunction);
-       
+        if (compareFunction && compareFunction instanceof Function) {
+            this.comparator = compareFunction;
+        }
     }
 }
-//const sorter = new Sorter();
+/*const sorter = new Sorter();
+        sorter.add(6);
+        sorter.add(5);
+        console.log(sorter.toArray()) // 6,5
+const REVERSE_COMPARATOR = (left, right) => right - left;
+        sorter.setComparator(REVERSE_COMPARATOR);
+        sorter.sort([1, 0]);
+  
+        sorter.add(20);
+        sorter.add(10);
+        sorter.add(100);
+        sorter.sort([3, 4]);
+ console.log(sorter.toArray()) */ // 6, 5, 20, 100, 10
 //sorter.add(1);
 // sorter.add(2);
 //console.log(sorter.length) // 2
