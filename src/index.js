@@ -6,6 +6,8 @@ class Sorter {
         this._arr = [];
         this.copy_partArr = [];
         this.sort_arr = [];
+        
+        this.copy_arr = [];
     }
     add(element) {
         // your implementation
@@ -29,7 +31,7 @@ class Sorter {
     sort(indices) {
         // your implementation
         let begin, end;
-        if (indices.length == 3) {
+/*        if (indices.length == 3) {
             begin = indices[0];
             end = indices[2];
         }
@@ -41,20 +43,33 @@ class Sorter {
             begin = indices[0];
             end = indices[1];
         }
-        this.copy_partArr = this._arr.slice(begin, end + 1);
+         this.copy_partArr = this._arr.slice(begin, end + 1);
+        */
+       
+        
+        for(var i = 0; i < indices.length; i++){
+            this.copy_arr.push(this._arr[indices[i]]);
+            
+        }
+        console.log(this.copy_arr);
 
-        /*function compareNumeric(a, b) {
+        function compareNumeric(a, b) {
             return a - b;
-        }*/
-        this.sort_arr = this.copy_partArr.sort(this.comparator);
+        }
+        this.sort_arr = this.copy_arr.sort(this.comparator|| compareNumeric);
+        
+        let delete_length = this.copy_arr.length;
+        for(var i = 0; i<this.sort_arr.length; i++){
+            arr.splice(i,1,this.sort_arr[i] );
+        }
 
-        function insertArrayAt(array, index, arrayToInsert) {
-            let delete_length = end - (begin - 1);
+      /*  function insertArrayAt(array, index, arrayToInsert) {
+            
             Array.prototype.splice.apply(array, [index, delete_length].concat(arrayToInsert));
-            //          console.log(array);
+                 console.log(array);
             return array;
         }
-        insertArrayAt(this._arr, begin, this.sort_arr);
+        insertArrayAt(this._arr, this.sort_arr[o], this.sort_arr);*/
     }
     setComparator(compareFunction) {
         // your implementation
@@ -63,7 +78,7 @@ class Sorter {
         }
     }
 }
-/*const sorter = new Sorter();
+const sorter = new Sorter();
         sorter.add(6);
         sorter.add(5);
         console.log(sorter.toArray()) // 6,5
@@ -107,4 +122,4 @@ console.log(sorter.toArray())
 console.log(sorter.toArray())
 
 */
-module.exports = Sorter;
+//module.exports = Sorter;
