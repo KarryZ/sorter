@@ -1,70 +1,85 @@
 class Sorter {
-  constructor() {
-    // your implementation
-		this._element = null;
-		this._index = null;
-		this._arr = []; 
-	//	this.sort_arr = []; 
-  }
-
-  add(element) {
-    // your implementation
-	//	if(element typeof  Symbol) this._element = Symbol.toPrimitive; 
-	//	if(element == "symbol"){			}
-		this._element = +element;
-		this._arr.push(+this._element);	
-			
-  }
-
-  at(index) {
-    // your implementation
-		return this._arr[index];
-  }
-
-  get length() {
-    // your implementation
-		return this._arr.length;
-  }
-
-  toArray() {
-    // your implementation
-	//	console.log(this._arr);
-		return this._arr;
-  }
-
-  sort(indices) {
-    // your implementation
-		let begin = indices[0];
-		let end = indices[1];
-		 ;
-		return this._arr.slice(begin, end).sort(function (a,b) {
-			return a - b;
-		})
-  }
-
-  setComparator(compareFunction) {
-    // your implementation
-		
-  }
+    constructor() {
+        // your implementation
+        this._element = null;
+        this._index = null;
+        this._arr = [];
+        this.copy_partArr = [];
+        this.sort_arr = [];
+    }
+    add(element) {
+        // your implementation
+        //	if(element typeof  Symbol) this._element = Symbol.toPrimitive; 
+        //	if(element == "symbol"){			}
+        this._element = +element;
+        this._arr.push(+this._element);
+    }
+    at(index) {
+        // your implementation
+        return this._arr[index];
+    }
+    get length() {
+        // your implementation
+        return this._arr.length;
+    }
+    toArray() {
+        // your implementation
+        return this._arr;
+    }
+    sort(indices) {
+        // your implementation
+        let begin, end;
+        if (indices.length == 3) {
+            begin = indices[0];
+            end = indices[2];
+        }
+        else if (indices[0] > indices[1]) {
+            begin = indices[1];
+            end = indices[0];
+        }
+        else {
+            begin = indices[0];
+            end = indices[1];
+        }
+        this.copy_partArr = this._arr.slice(begin, end + 1);
+        console.log(this.copy_partArr)
+        this.sort_arr = this.copy_partArr.sort(function (a, b) {
+            return a - b;
+        });
+        //  return this._arr = this._arr.splice(begin, this.sort_arr.length, this.sort_arr);
+        function insertArrayAt(array, index, arrayToInsert) {
+            let delete_length = end - (begin - 1);
+            //    array = array.splice(begin, delete_length);
+            Array.prototype.splice.apply(array, [index, delete_length].concat(arrayToInsert));
+            console.log(array);
+            return array;
+        }
+        insertArrayAt(this._arr, begin, this.sort_arr);
+    }
+    setComparator(compareFunction) {
+        // your implementation
+    }
 }
-/*
-
- const sorter = new Sorter();
-  sorter.add(1);
-  sorter.add(2);
-
-  console.log(sorter.length) // 2
-  console.log(sorter.toArray()) // [1, 2]
-     sorter.add(6);
-console.log(sorter.toArray())
+const sorter = new Sorter();
+//sorter.add(1);
+// sorter.add(2);
+//console.log(sorter.length) // 2
+//console.log(sorter.toArray()) // [1, 2]
+/* sorter.add(7);
+ sorter.add(6);
+ sorter.add(5);
+ sorter.sort([0, 1, 2]); // 5, 6, 7
+ console.log(sorter.toArray())*/
+/*  sorter.add(6);
+sorter.toArray()
       sorter.add(5);
-console.log(sorter.toArray())
+sorter.toArray()
       sorter.add(20);
-console.log(sorter.toArray())
+sorter.toArray()
       sorter.add(10);
-console.log(sorter.toArray())
+    sorter.toArray()
       sorter.add(100);
-console.log(sorter.toArray())
+    sorter.toArray()
 
       sorter.sort([2, 1]); // 6, 5
 console.log(sorter.toArray())
@@ -77,6 +92,4 @@ console.log(sorter.toArray())
 console.log(sorter.toArray())
 
 */
-
-
 module.exports = Sorter;
