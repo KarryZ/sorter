@@ -43,13 +43,15 @@ class Sorter {
         }
         this.copy_partArr = this._arr.slice(begin, end + 1);
         console.log(this.copy_partArr)
-        this.sort_arr = this.copy_partArr.sort(function (a, b) {
+
+        function compareNumeric(a, b) {
             return a - b;
-        });
-        //  return this._arr = this._arr.splice(begin, this.sort_arr.length, this.sort_arr);
+        }
+        this.sort_arr = this.copy_partArr.sort(compareNumeric);
+        
+        
         function insertArrayAt(array, index, arrayToInsert) {
             let delete_length = end - (begin - 1);
-            //    array = array.splice(begin, delete_length);
             Array.prototype.splice.apply(array, [index, delete_length].concat(arrayToInsert));
             console.log(array);
             return array;
@@ -58,9 +60,11 @@ class Sorter {
     }
     setComparator(compareFunction) {
         // your implementation
+        return this.copy_partArr.sort(compareFunction);
+       
     }
 }
-const sorter = new Sorter();
+//const sorter = new Sorter();
 //sorter.add(1);
 // sorter.add(2);
 //console.log(sorter.length) // 2
