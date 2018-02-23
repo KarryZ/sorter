@@ -1,53 +1,30 @@
 class Sorter {
     constructor() {
         // your implementation
-        this._element = null;
-        this._index = null;
-        this._arr = [];
-        this.copy_partArr = [];
-        this.sort_arr = [];
+        this.data = [];
+        
     }
     add(element) {
         // your implementation
-        this._element = +element;
-        this._arr.push(+this._element);
+        this.data.push(element);
     }
     at(index) {
         // your implementation
-        return this._arr[index];
+        return this.data[index];
     }
     get length() {
         // your implementation
-        return this._arr.length;
+        return this.data.length;
     }
     toArray() {
         // your implementation
-        return this._arr;
+        return this.data;
     }
     sort(indices) {
-        // your implementation
-        let copy_arr = [];
-        for (var i = 0; i < indices.length; i++) {
-            copy_arr.push(this._arr[indices[i]]);
-        }
-        console.log(copy_arr);
-
-        function compareNumeric(a, b) {
-            return a - b;
-        }
-        this.sort_arr = copy_arr.sort(this.comparator);
-        for (var j = 0; j < this.sort_arr.length; j++) {
-            this._arr.splice(j, 1, this.sort_arr[j]);
-        }
-        console.log(copy_arr);
-        /*  function insertArrayAt(array, index, arrayToInsert) {
-              
-              Array.prototype.splice.apply(array, [index, delete_length].concat(arrayToInsert));
-                   console.log(array);
-              return array;
-          }
-          insertArrayAt(this._arr, this.sort_arr[o], this.sort_arr);*/
+           let sortedIndices = indices.sort();
+        let sortedValues = sortedIndices.map()
     }
+        
     setComparator(compareFunction) {
         // your implementation
         if (compareFunction && compareFunction instanceof Function) {
@@ -55,29 +32,19 @@ class Sorter {
         }
     }
 }
-//const sorter = new Sorter();
-//sorter.add(6);
-//sorter.add(5);
-//const REVERSE_COMPARATOR = (left, right) => right - left;
-//sorter.setComparator(REVERSE_COMPARATOR);
-//console.log(sorter.toArray())
-//sorter.sort([1, 0]);
-//console.log(sorter.toArray())
-//sorter.add(20);
-//sorter.add(10);
-//sorter.add(100);
-//sorter.sort([3, 4]);
-//console.log(sorter.toArray())
-
-// 6, 5, 20, 100, 10
-    
-
-
-
-
-
-
-
+const sorter = new Sorter();
+sorter.add(6);
+sorter.add(5);
+const REVERSE_COMPARATOR = (left, right) => right - left;
+sorter.setComparator(REVERSE_COMPARATOR);
+console.log(sorter.toArray())
+sorter.sort([1, 0]);
+console.log(sorter.toArray())
+sorter.add(20);
+sorter.add(10);
+sorter.add(100);
+sorter.sort([3, 4]);
+console.log(sorter.toArray()) // 6, 5, 20, 100, 10
     //sorter.add(1);
     // sorter.add(2);
     //console.log(sorter.length) // 2
